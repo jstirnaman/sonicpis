@@ -1,0 +1,61 @@
+def s3
+  with_synth :pretty_bell do
+    with_fx :wobble do
+      play_pattern_timed chord(:E, :m9), 0.2, amp: 0.1
+    end
+  end
+end
+
+def boom
+  with_fx :reverb, room: 1 do
+    sample :bd_boom, amp: 5, rate: 1
+  end
+end
+
+use_bpm 80
+
+in_thread do
+  live_loop :beat do
+    boom
+    with_fx :compressor do
+      sample :loop_industrial, rate: 0.8, amp: 0.5
+    end
+    sleep 1.5
+  end
+
+  live_loop :guit do
+    sync :beat
+    4.times do
+      with_fx :echo, mix: 0.3, phase: 0.25 do
+        s3
+      sleep 5
+      end
+    end
+  end
+end
+
+in_thread do
+  sync :guit
+  4.times do
+    with_fx :echo, phase: 0.25 do
+      sample :guit_e_fifths, rate: 1, pan: -1
+    end
+    sleep 3
+  end
+
+  2.times do
+      play chord(:E3, :minor).choose, pan: -1, release: 2, attack: 2
+      sleep 2
+      play chord(:E3, :minor).choose, pan: 1, release: 2, attack: 2
+      sleep 2
+  end
+  
+  sleep 2
+
+  2.times do
+      play chord(:E3, :minor).choose, pan: -1, release: 2, attack: 2
+      sleep 2
+      play chord(:E3, :minor).choose, pan: 1, release: 2, attack: 2
+      sleep 2
+  end
+end
