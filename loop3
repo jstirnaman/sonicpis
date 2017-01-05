@@ -1,0 +1,63 @@
+live_loop :guit_i do
+  4.times do
+    sample :guit_em9, pan: 1
+    sleep 2
+    guit
+    with_fx :reverb, rate: 0.5 do
+      sample :drum_heavy_kick, rate: 1.0
+    end
+    sleep 4
+    with_fx :reverb, rate: 1.0 do
+      sample :drum_heavy_kick, rate: 2.0
+    end
+    sleep 1.6
+    6.times do
+      with_fx :reverb, rate: 1.0 do
+        sample :drum_heavy_kick, amp: 0.5, rate: 2.0
+      end
+      sleep 0.1
+    end
+  end
+8.times do
+  sample :guit_em9, pan: 1, amp: 0.5
+  use_synth :fm
+  play 26, pan: -1, amp: 1.0, release: 2
+  sleep 1
+  use_synth :prophet
+  play 42, pan: -1, release: 2
+  sleep 0.5
+  play 43, pan: 1, release: 2
+  sleep 0.5
+  play 52, pan: -1, release: 2
+  sleep 1.0
+  play 52, pan: -1, release: 2
+  sleep 1.0
+  guit
+  kick_loop
+end
+end
+
+def kick_loop
+    with_fx :reverb, rate: 0.5 do
+      sample :drum_heavy_kick, rate: 1.0
+    end 
+end
+
+def loop_1
+  8.times do
+    with_fx :echo, rate: 2.0 do
+      sample :loop_amen, pan: -1
+      sleep 0.8
+    end
+    sample :drum_heavy_kick, rate: 2.0
+    sleep 0.2
+  end
+  sleep 1
+  sample :drum_heavy_kick, rate: 1.0
+  sleep 1
+end
+define :guit do
+  with_fx :echo, mix: 0.5, phase: 0.5 do
+    sample :guit_em9, rate: 0.5
+  end
+end

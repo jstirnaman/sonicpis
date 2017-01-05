@@ -1,0 +1,33 @@
+# Welcome to Sonic Pi v2.6
+live_loop :guit_i do
+  with_fx :echo, mix: 0.5, phase: 0.5 do
+    sample :guit_harmonics, rate: 0.5
+  end
+
+  sleep 2
+
+  4.times do
+    guit
+    with_fx :reverb, rate: 0.5 do
+      sample :drum_heavy_kick, rate: 1.0
+    end
+  end
+
+  sleep 0.5
+
+  sample :drum_heavy_kick, rate: 1.0
+
+  sleep 1
+
+  with_fx :echo, rate: 2.0 do
+    sample :loop_amen, pan: -1
+    sleep 0.8
+    sample :guit_em9, pan: 1
+  end
+end
+
+  define :guit do
+      with_fx :echo, mix: 0.5, phase: 0.5 do
+        sample :guit_em9, rate: 0.5
+      end
+  end

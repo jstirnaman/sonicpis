@@ -1,0 +1,19 @@
+# Welcome to Sonic Pi v2.6
+
+8.times do
+  sample :guit_em9, pan: 1, amp: 0.5
+  use_synth :fm
+  play 26, pan: -1, amp: 1.0, release: 2
+  sleep 1
+  use_synth :prophet
+  play 42, pan: -1, release: 2
+  sleep 0.5
+  play 43, pan: 1, release: 2
+  sleep 0.5
+  play 52, pan: -1, release: 2
+  sleep 1.0
+  play 52, pan: -1, release: 2
+  sleep 1.0
+  guit
+  kick_loop
+end

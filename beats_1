@@ -1,0 +1,21 @@
+# Welcome to Sonic Pi v2.6
+live_loop :guit_i do
+  4.times do
+    synth :dsaw, amp: 0.2, sustain: 4, note: :D
+    synth :tb303, amp: 0.5, attack: 2, sustain: 0, note: :C
+    sample :bass_thick_c
+    sample :drum_heavy_kick
+    synth :tb303, amp: 0.5, attack: 2, sustain: 0
+    sleep 0.2
+    with_fx :panslicer, mix: 0.4 do
+      sample :sn_dub
+    end
+    sleep 0.1
+  end
+end
+
+define :guit do
+  with_fx :echo, mix: 0.5, phase: 0.5 do
+    sample :guit_em9, rate: 1
+  end
+end

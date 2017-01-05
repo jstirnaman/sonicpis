@@ -1,0 +1,32 @@
+# Welcome to Sonic Pi v2.6
+live_loop :guit_i do
+  4.times do
+    sample :bass_thick_c
+    sample :drum_heavy_kick
+    sleep 0.2
+  end
+  snare
+  n = 64
+  a = 2
+  4.times do
+    synth :dsaw, amp: 0.2, sustain: 0, note: n
+    synth :tb303, amp: 0.5, attack: a, sustain: 0, note: :C
+    n += 8
+    a += 4
+  end
+  snare
+  sleep 0.4
+  snare
+end
+
+define :snare do
+    with_fx :panslicer, mix: 0.4 do
+      sample :sn_dub
+    end
+end
+
+define :guit do
+  with_fx :echo, mix: 0.5, phase: 0.5 do
+    sample :guit_em9, rate: 1
+  end
+end
